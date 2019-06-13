@@ -13,3 +13,7 @@ spec:
         app: runtime-controller
     spec:
       serviceAccount: runtime-controller
+      containers:
+      # gets changed by sed command when running `docker-build`
+      - image: ""
+        name: runtime-manager
