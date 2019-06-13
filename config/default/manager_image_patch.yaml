@@ -14,6 +14,7 @@ spec:
     spec:
       serviceAccount: runtime-controller
       containers:
-      # gets changed by sed command when running `docker-build`
-      - image: ""
-        name: runtime-manager
+        # gets changed by sed command when running `docker-build`
+        - image: index.docker.io/nachtmaar/runtime-controller:latest
+          name: manager
+          imagePullPolicy: Always
