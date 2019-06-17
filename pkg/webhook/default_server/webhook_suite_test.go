@@ -23,7 +23,6 @@ import (
 	"sync"
 	"testing"
 
-	servingv1alpha1 "github.com/knative/serving/pkg/apis/serving/v1alpha1"
 	"github.com/kyma-incubator/runtime/pkg/apis"
 	"github.com/onsi/gomega"
 	"k8s.io/client-go/kubernetes/scheme"
@@ -40,8 +39,6 @@ func TestMain(m *testing.M) {
 		CRDDirectoryPaths: []string{filepath.Join("..", "..", "..", "config", "crds")},
 	}
 	apis.AddToScheme(scheme.Scheme)
-
-	servingv1alpha1.SchemeBuilder.AddToScheme(scheme.Scheme)
 
 	var err error
 	if cfg, err = t.Start(); err != nil {

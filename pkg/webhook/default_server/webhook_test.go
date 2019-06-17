@@ -14,7 +14,6 @@ import (
 
 	"crypto/tls"
 	"encoding/json"
-	"io/ioutil"
 
 	"github.com/onsi/gomega"
 	admissionv1beta1 "k8s.io/api/admission/v1beta1"
@@ -75,11 +74,7 @@ func TestWebHook(t *testing.T) {
 
 	// decode admission review
 	var response admissionv1beta1.AdmissionReview
-	bodyBytes, err := ioutil.ReadAll(admissionRequest.Body)
-	if err != nil {
-		t.Error(err)
-	}
-	json.Unmarshal(bodyBytes, &response)
+	g.Expect(json.NewDecoder(admissionRequest.Body).Decode(&response)).NotTo(gomega.HaveOccurred())
 
 	// ensure function got rejected
 	g.Expect(response.Response.Allowed).To(gomega.BeFalse())
